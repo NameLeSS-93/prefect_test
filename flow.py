@@ -1,6 +1,7 @@
 from prefect import flow, task
 import os
 import time
+from .aws import sync_s3
 
 
 @task
@@ -26,12 +27,7 @@ def task_5_sec():
 
 @flow(log_prints=True)
 def my_flow():
-    
-    task_10_sec.submit()
-    task_5_sec.submit()
-
-    create_file()
-    print("File created")
+    sync_s3()
 
 
 if __name__ == "__main__":
