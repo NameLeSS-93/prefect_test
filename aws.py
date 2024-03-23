@@ -2,11 +2,11 @@ import subprocess
 from prefect import task
 import boto3
 import os
+from botocore import UNSIGNED
+from botocore.client import Config
 
 
-s3 = boto3.resource('s3')
-
-# Local directory to sync
+s3 = boto3.resource('s3', region_name='us-west-1', config=Config(signature_version=UNSIGNED))
 PATH = '/home/nmyakishev-93/openalex-snapshot-new'
 
 
