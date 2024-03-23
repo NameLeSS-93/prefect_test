@@ -10,24 +10,24 @@ def create_file():
         file.write('test')
 
 
-@task(task_runner=DaskTaskRunner())
+@task
 def show_cwd():
     return os.getcwd()
 
 
-@task(task_runner=DaskTaskRunner())
+@task
 def task_10_sec():
     time.sleep(10)
     
     return 1
 
 
-@task(task_runner=DaskTaskRunner())
+@task
 def task_5_sec(arg):
     time.sleep(5)
 
 
-@flow(log_prints=True)
+@flow(log_prints=True, task_runner=DaskTaskRunner())
 def my_flow():
     
     task_10_sec()
