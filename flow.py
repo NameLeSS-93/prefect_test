@@ -29,8 +29,8 @@ def task_5_sec():
 @flow(log_prints=True)
 def my_flow():
     
-    task_10_sec().submit()
-    task_5_sec().submit()
+    task_10_sec.submit()
+    task_5_sec.submit()
     
     result = task_10_sec()
     task_5_sec(result)
