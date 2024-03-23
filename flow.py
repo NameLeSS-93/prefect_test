@@ -1,6 +1,7 @@
 from prefect import flow, task
 import os
 import time
+from prefect_dask.task_runners import DaskTaskRunner
 
 
 @task
@@ -9,19 +10,19 @@ def create_file():
         file.write('test')
 
 
-@task
+@task(task_runner=DaskTaskRunner())
 def show_cwd():
     return os.getcwd()
 
 
-@task
+@task(task_runner=DaskTaskRunner())
 def task_10_sec():
     time.sleep(10)
     
     return 1
 
 
-@task
+@task(task_runner=DaskTaskRunner())
 def task_5_sec(arg):
     time.sleep(5)
 
