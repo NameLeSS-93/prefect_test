@@ -17,8 +17,6 @@ def show_cwd():
 @task
 def task_10_sec():
     time.sleep(10)
-    
-    return 1
 
 
 @task
@@ -31,10 +29,7 @@ def my_flow():
     
     task_10_sec.submit()
     task_5_sec.submit()
-    
-    result = task_10_sec()
-    task_5_sec(result)
-    
+
     create_file()
     print("File created")
 
