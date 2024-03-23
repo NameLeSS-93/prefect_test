@@ -1,7 +1,7 @@
 from prefect import flow, task
 import os
 import time
-from .aws import sync_s3
+from aws import sync_s3
 
 
 @task
