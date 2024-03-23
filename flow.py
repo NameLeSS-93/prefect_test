@@ -1,9 +1,10 @@
 from prefect import flow, task
 import os
+import time
 
 
 @task
-def create_file(path):
+def create_file():
     with open('/home/nmyakishev-93/test.txt', 'w') as file:
         file.write('test')
 
@@ -13,12 +14,28 @@ def show_cwd():
     return os.getcwd()
 
 
+@task
+def task_10_sec():
+    time.sleep(10)
+    
+    return 1
+
+
+@task
+def task_5_sec(arg):
+    time.sleep(5)
+
+
 @flow(log_prints=True)
 def my_flow():
-    path = show_cwd()
-    print(f"Got {path=}")
-
-    create_file(path)
+    
+    task_10_sec()
+    task_5_sec()
+    
+    result = task_10_sec()
+    task_5_sec(result)
+    
+    create_file()
     print("File created")
 
 
