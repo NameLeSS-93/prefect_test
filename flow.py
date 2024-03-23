@@ -1,15 +1,24 @@
 from prefect import flow, task
+import os
 
 
 @task
-def create_file():
-    with open('test.txt', 'w') as file:
+def create_file(path):
+    with open(f'{path}/test.txt', 'w') as file:
         file.write('test')
+
+
+@task
+def show_cwd():
+    return os.getcwd()
 
 
 @flow(log_prints=True)
 def my_flow():
-    create_file()
+    path = show_cwd()
+    print(f"Got {path=}")
+
+    create_file(path)
     print("File created")
 
 
