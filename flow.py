@@ -1,7 +1,6 @@
 from prefect import flow, task
 import os
 import time
-from prefect_dask.task_runners import DaskTaskRunner
 
 
 @task
@@ -23,15 +22,15 @@ def task_10_sec():
 
 
 @task
-def task_5_sec(arg):
+def task_5_sec():
     time.sleep(5)
 
 
-@flow(log_prints=True, task_runner=DaskTaskRunner())
+@flow(log_prints=True)
 def my_flow():
     
-    task_10_sec()
-    task_5_sec(1)
+    task_10_sec().submit()
+    task_5_sec().submit()
     
     result = task_10_sec()
     task_5_sec(result)
