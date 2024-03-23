@@ -30,7 +30,7 @@ def task_5_sec(arg):
 def my_flow():
     
     task_10_sec()
-    task_5_sec()
+    task_5_sec(1)
     
     result = task_10_sec()
     task_5_sec(result)
