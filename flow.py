@@ -4,7 +4,7 @@ import os
 
 @task
 def create_file(path):
-    with open(f'~/test.txt', 'w') as file:
+    with open('/home/nmyakishev-93/test.txt', 'w') as file:
         file.write('test')
 
 
